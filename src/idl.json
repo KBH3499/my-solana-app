@@ -1,0 +1,395 @@
+{
+  "version": "0.1.0",
+  "name": "staking_ikigai_program",
+  "instructions": [
+    {
+      "name": "initialize",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "poolInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakingToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "adminStakingWallet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "pairs",
+          "type": {
+            "array": [
+              {
+                "defined": "PoolDetail"
+              },
+              4
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "stake",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userStakingWallet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "adminStakingWallet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakingToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "index",
+          "type": "u8"
+        },
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "claimReward",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userStakingWallet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "adminStakingWallet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "unstake",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "userInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "userStakingWallet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "adminStakingWallet",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "stakingToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "poolInfo",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "updatePoolDetail",
+      "accounts": [
+        {
+          "name": "admin",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "poolInfo",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "index",
+          "type": "u8"
+        },
+        {
+          "name": "newDetail",
+          "type": {
+            "defined": "PoolDetail"
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "PoolInfo",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "admin",
+            "type": "publicKey"
+          },
+          {
+            "name": "token",
+            "type": "publicKey"
+          },
+          {
+            "name": "keyValuePairs",
+            "type": {
+              "array": [
+                {
+                  "defined": "PoolDetail"
+                },
+                4
+              ]
+            }
+          },
+          {
+            "name": "totalStaked",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserInfo",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "depositTimestamp",
+            "type": "i64"
+          },
+          {
+            "name": "rewardDebt",
+            "type": "u64"
+          },
+          {
+            "name": "lockPeriod",
+            "type": "u64"
+          },
+          {
+            "name": "rewardPercentage",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "types": [
+    {
+      "name": "PoolDetail",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "lockSeconds",
+            "type": "u64"
+          },
+          {
+            "name": "poolSize",
+            "type": "u64"
+          },
+          {
+            "name": "userLimit",
+            "type": "u64"
+          },
+          {
+            "name": "rewardPercentage",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "IsStaked",
+      "msg": "Tokens are Already Staked"
+    },
+    {
+      "code": 6001,
+      "name": "NotStaked",
+      "msg": "Tokens not Staked"
+    },
+    {
+      "code": 6002,
+      "name": "NoTokens",
+      "msg": "No Tokens to Staked"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidLockPeriod",
+      "msg": "Invalid lock period."
+    },
+    {
+      "code": 6004,
+      "name": "LockPeriodNotOver",
+      "msg": "Lock period is not over yet."
+    },
+    {
+      "code": 6005,
+      "name": "NoRewardsToClaim",
+      "msg": "No rewards available to claim."
+    },
+    {
+      "code": 6006,
+      "name": "InvalidPoolSize",
+      "msg": "Invalid Pool Size."
+    },
+    {
+      "code": 6007,
+      "name": "InvalidUserLimit",
+      "msg": "Invalid User Limit."
+    },
+    {
+      "code": 6008,
+      "name": "CannotStakeMoreThanLimit",
+      "msg": "Cannot Stake More Than Limit."
+    },
+    {
+      "code": 6009,
+      "name": "InvalidIndex",
+      "msg": "The specified index is out of bounds."
+    },
+    {
+      "code": 6010,
+      "name": "PoolLimitExceeded",
+      "msg": "Pool Limit Exceeded"
+    },
+    {
+      "code": 6011,
+      "name": "InvalidStakedAmount",
+      "msg": "Invalid Stake Anmount"
+    },
+    {
+      "code": 6012,
+      "name": "InvalidOwner",
+      "msg": "The owner of the token account does not match."
+    },
+    {
+      "code": 6013,
+      "name": "InvalidMint",
+      "msg": "The token account mint does not match the staking token."
+    },
+    {
+      "code": 6014,
+      "name": "InsufficientAdminBalance",
+      "msg": "Insufficient Admin Balance"
+    },
+    {
+      "code": 6015,
+      "name": "ArithmeticOverflow",
+      "msg": "Arithmetic Overflow"
+    }
+  ],
+  "metadata": {
+    "address": "AproH98aNb7xEwGJRkRK7ruYhwfVEqPoYqTytBtGEaxy"
+  }
+}
