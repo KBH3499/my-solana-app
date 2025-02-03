@@ -236,5 +236,6 @@ export const stakingTokenMint = new PublicKey(
     "84AYw2XZ5HcyWWmVNR6s4uS3baHrMLpPMnEfBTm6JkdE",
 );
 
-export const stakingProgram = "AproH98aNb7xEwGJRkRK7ruYhwfVEqPoYqTytBtGEaxy"
+export const stakingProgram = "ikiDdCwsrbdS2zBYdUEYXMALnDdBNtKwCoQgLVKz37F"
+// export const stakingProgram = "AproH98aNb7xEwGJRkRK7ruYhwfVEqPoYqTytBtGEaxy"
 export const stakingProgramTyke = "Apro1E15gaCqp8ZtJZgt7LDm5X1iSscWdhYJQZCS2NDa"

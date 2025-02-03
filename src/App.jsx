@@ -8,10 +8,9 @@ import {
   WalletModalProvider,
   WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
-import { PhantomWalletAdapter } from "@solana/wallet-adapter-wallets";
+import { PhantomWalletAdapter, SolflareWalletAdapter } from "@solana/wallet-adapter-wallets";
 import { clusterApiUrl } from "@solana/web3.js";
 import "@solana/wallet-adapter-react-ui/styles.css";
-
 import SmartContractActions from "./components/SmartContractActions";
 import NftManager from "./components/NftManager";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
@@ -19,7 +18,7 @@ import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 const App = () => {
   const network = WalletAdapterNetwork.Devnet;
   const endpoint = useMemo(() => clusterApiUrl(network), [network]);
-  const wallets = useMemo(() => [new PhantomWalletAdapter()], []);
+  const wallets = useMemo(() => [new PhantomWalletAdapter(), new SolflareWalletAdapter()], []);
   const umi = createUmi(endpoint);
   
   const [isStakeUnstake, setIsStakeUnstake] = useState(false);

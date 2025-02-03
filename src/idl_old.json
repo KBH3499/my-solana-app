@@ -139,11 +139,6 @@
           "isSigner": false
         },
         {
-          "name": "poolInfo",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
           "name": "tokenProgram",
           "isMut": false,
           "isSigner": false
@@ -223,60 +218,6 @@
           }
         }
       ]
-    },
-    {
-      "name": "increaseReward",
-      "accounts": [
-        {
-          "name": "user",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "admin",
-          "isMut": true,
-          "isSigner": true
-        },
-        {
-          "name": "userInfo",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "userStakingWallet",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "adminStakingWallet",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "poolInfo",
-          "isMut": true,
-          "isSigner": false
-        },
-        {
-          "name": "tokenProgram",
-          "isMut": false,
-          "isSigner": false
-        }
-      ],
-      "args": [
-        {
-          "name": "collectionAddress",
-          "type": "publicKey"
-        },
-        {
-          "name": "expectedSignerAddress",
-          "type": "publicKey"
-        },
-        {
-          "name": "traitType",
-          "type": "string"
-        }
-      ]
     }
   ],
   "accounts": [
@@ -335,14 +276,6 @@
           {
             "name": "rewardPercentage",
             "type": "u64"
-          },
-          {
-            "name": "rewardBoosted",
-            "type": "bool"
-          },
-          {
-            "name": "stakeIndex",
-            "type": "u8"
           }
         ]
       }
@@ -368,22 +301,6 @@
           },
           {
             "name": "rewardPercentage",
-            "type": "u64"
-          },
-          {
-            "name": "isOpen",
-            "type": "bool"
-          },
-          {
-            "name": "startTime",
-            "type": "i64"
-          },
-          {
-            "name": "normalAssetRewardPercentage",
-            "type": "u64"
-          },
-          {
-            "name": "specialAssetRewardPercentage",
             "type": "u64"
           }
         ]
@@ -470,44 +387,9 @@
       "code": 6015,
       "name": "ArithmeticOverflow",
       "msg": "Arithmetic Overflow"
-    },
-    {
-      "code": 6016,
-      "name": "AlreadyBoosted",
-      "msg": "Already Boosted"
-    },
-    {
-      "code": 6017,
-      "name": "InvalidCollection",
-      "msg": "The collection address does not match the expected value."
-    },
-    {
-      "code": 6018,
-      "name": "InvalidSigner",
-      "msg": "The signer address does not match the expected value."
-    },
-    {
-      "code": 6019,
-      "name": "PoolClosed",
-      "msg": "Pool Closed"
-    },
-    {
-      "code": 6020,
-      "name": "InvalidPoolDetails",
-      "msg": "Invalid pool detail"
-    },
-    {
-      "code": 6021,
-      "name": "PoolStillActive",
-      "msg": "Pool Is Still Active"
-    },
-    {
-      "code": 6022,
-      "name": "PoolTimeOver",
-      "msg": "Pool Time Over"
     }
   ],
   "metadata": {
-    "address": "ikiDdCwsrbdS2zBYdUEYXMALnDdBNtKwCoQgLVKz37F"
+    "address": "AproH98aNb7xEwGJRkRK7ruYhwfVEqPoYqTytBtGEaxy"
   }
 }
