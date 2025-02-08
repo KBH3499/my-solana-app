@@ -18,8 +18,10 @@ import {
 } from "@solana/spl-token";
 import bs58 from "bs58"; // ✅ Import bs58 for Base58 encoding
 import { walletAdapterIdentity } from "@metaplex-foundation/umi-signer-wallet-adapters";
+import assets from "../nft_assets.json"
 
 export default function NFTGallery({ umi, endpoint }) {
+  const {nftAssets} = assets
   const [nfts, setNfts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [missingNFTs, setMissingNFTs] = useState([]);
@@ -233,34 +235,38 @@ export default function NFTGallery({ umi, endpoint }) {
 
   return (
     <div className="gallery-container">
-      <h1 className="title">NFT Collection</h1>
+  <h1 className="title">NFT Collection</h1>
 
-      {loading ? (
-        <p className="loading-text">Loading NFTs...</p>
-      ) : (
-        <>
-          <p className="stats">
-            Loaded {nfts.length} NFTs | Missing {missingNFTs.length}
-          </p>
-          <div className="nft-grid">
-            {nfts.map((nft, index) => (
-              <div key={index} className="nft-card">
-                <img src={nft.image} alt={nft.name} className="nft-image" />
-                <h3 className="nft-name">{nft.name}</h3>
-                <button
-                  className="mint-button"
-                  onClick={()=>createAsset(nft.name)} // Call createAsset when mint button is clicked
-                >
+  {loading ? (
+    <p className="loading-text">Loading NFTs...</p>
+  ) : (
+    <>
+      <p className="stats">
+        Loaded {nfts.length} NFTs | Missing {missingNFTs.length}
+      </p>
+      <div className="nft-grid">
+        {nfts.map((nft, index) => {
+          const isMinted = nftAssets.some(asset => asset.name === nft.name); // Check if NFT is in the JSON list
+
+          return (
+            <div key={index} className="nft-card">
+              <img src={nft.image} alt={nft.name} className="nft-image" />
+              <h3 className="nft-name">{nft.name}</h3>
+              {!isMinted && ( // Hide button if NFT is in nftAssets
+                <button className="mint-button" onClick={() => createAsset(nft.name)}>
                   Mint
                 </button>
-              </div>
-            ))}
-          </div>
-          <button className="load-more-button" onClick={loadMore}>
-            Load More
-          </button>
-        </>
-      )}
-    </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <button className="load-more-button" onClick={loadMore}>
+        Load More
+      </button>
+    </>
+  )}
+</div>
+
   );
 }

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import {
   ConnectionProvider,
@@ -14,6 +14,7 @@ import "@solana/wallet-adapter-react-ui/styles.css";
 import SmartContractActions from "./components/SmartContractActions";
 import NftManager from "./components/NftManager";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+import { updateData } from "./utils/helper";
 
 const App = () => {
   const network = WalletAdapterNetwork.Devnet;
@@ -23,6 +24,10 @@ const App = () => {
   
   const [isStakeUnstake, setIsStakeUnstake] = useState(false);
   const [isMintNFT, setIsMintNFT] = useState(false);
+
+  useEffect(()=>{
+    updateData()
+  },[])
 
   return (
     <ConnectionProvider endpoint={endpoint}>
